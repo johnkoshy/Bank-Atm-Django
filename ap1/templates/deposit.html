@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Deposit Cash{% endblock %}
+
+{% block body %}
+<a href="{% url 'logout' %}">Logout</a>
+ <h2>Deposit Cash</h2>
+
+<script>
+function validateForm() {
+  var x = document.forms["myForm"]["dep_cash"].value;
+  if (x == "" || x == null) {
+    alert("Amount must be filled out");
+    return false;
+  }
+}
+</script>
+
+<form name="myForm" action="deposit_amount/{{ customers.id }}" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+    <input type="number" name="dep_cash" value="">
+    <br><br>
+
+    <input type="submit" name="submit" value="Deposit">
+
+    <br><br><br><br>
+
+    <form>
+     <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+
+</form>
+
+{% endblock %}
