@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}Login Hello{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
+{% load static %}
 <h2>Login</h2>
-
+<style>
+        #login:hover {
+            color: blue;
+        }
+        </style>
 <form method="POST">
     {% csrf_token %}
     <input type="text" name="uname" placeholder="User Name">
     <br><br>
     <input type="text" name="pwd" placeholder="Password">
     <br><br>
-    <input type="submit" name="submit" value="Login">
+    <input id="login" type="submit" name="submit" value="Login">
 </form>
 
 

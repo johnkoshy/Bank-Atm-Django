@@ -1,11 +1,18 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>{% block title %}{% endblock %}</title>
-</head>
 
-<body>
+    <title>{% block title %}{% endblock %}</title>
+
+
+</head>
+{% load static %}
+<img class="center" src="{% static 'SBI-logo_cust1.jpg' %}"><br><br>
+<marquee direction="right">Welcome to SBI &#128512</marquee><br><br>
+<body id="bg" style="background-image: url('{% static "light_background.jpg"%}')";>
+<link rel="stylesheet" href="{% static 'myglobal.css' %}">
 
 <h1 style="text-align: center;">SBI Bank</h1>
 
@@ -14,10 +21,12 @@
 
     {% if current_user %}
 
+
+
     <a href="{% url 'logout' %}">Logout</a>
 
     {% for x in customers %}
-    <h2>Welcome <span style="color: dodgerblue;">{{x.customer_name}}</span>!</h2>
+    <h2 id="col_wel">Welcome <span style="color: dodgerblue;">{{x.customer_name}}</span>!</h2>
     {% endfor %}
 
     {% else %}

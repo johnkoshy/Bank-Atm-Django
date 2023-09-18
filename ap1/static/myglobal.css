@@ -1,0 +1,15 @@
+#col_wel {
+  color: violet;
+}
+
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+#bg{
+    background-size: 1800px 900px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
