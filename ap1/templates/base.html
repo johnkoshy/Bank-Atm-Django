@@ -6,24 +6,75 @@
 
     <title>{% block title %}{% endblock %}</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideToggle("slow");
+  });
+});
+</script>
+
+<!--    below is the jquery for About US portion-->
+<style>
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+
+#panel {
+  padding: 50px;
+  display: none;
+}
+</style>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'myglobal.css' %}">
+    <script src="https://kit.fontawesome.com/75b09f8ac8.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
 </head>
-{% load static %}
-<img class="center" src="{% static 'SBI-logo_cust1.jpg' %}"><br><br>
-<marquee direction="right">Welcome to SBI &#128512</marquee><br><br>
+
+<img class="center" src="{% static 'SBI-logo_cust1.jpg' %}">
+
+<div style="background-color: rgb(28, 28, 100);">
+
+        <!-- inbuilt class used to set the menus horizontally -->
+        <nav class="navbar navbar-expand-sm">
+
+            <ul class="navbar-nav">
+                <li class="left-margin seperator"><a style="color: aliceblue;" href="/"><i
+                            class="fa-solid fa-user">&nbsp;&nbsp;</i>Home</a>&nbsp;&nbsp;&nbsp;</li>
+                &nbsp;&nbsp;&nbsp;
+
+                <li class="seperator">&nbsp;<a style="color:aliceblue" href="#">Call Us Now
+                        1800-425-3800</a>&nbsp;&nbsp;&nbsp;</li>
+
+                <li>
+                    <a href="https://www.pinterest.com/TheOfficialSBI/"><i style="margin-left: 850px; color:aliceblue"
+                            class="fa-brands fa-pinterest"></i></a>&nbsp;&nbsp;
+                    <a href="https://www.facebook.com/StateBankOfIndia"><i style="color:aliceblue"
+                            class="fa-brands fa-facebook-f"></i></a>&nbsp;&nbsp;
+                    <a href="https://twitter.com/TheOfficialSBI"><i style="color:aliceblue"
+                            class="fa-brands fa-twitter"></i></a>&nbsp;&nbsp;
+                    <a href="https://www.instagram.com/theofficialsbi/"><i style="color:aliceblue"
+                            class="fa-brands fa-instagram"></i></a>&nbsp;&nbsp;
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+<marquee direction="right">Welcome to SBI &#128512</marquee><br>
 <body id="bg" style="background-image: url('{% static "light_background.jpg"%}')";>
-<link rel="stylesheet" href="{% static 'myglobal.css' %}">
 
-<h1 style="text-align: center;">SBI Bank</h1>
-
-    <a href="/">Home</a>
-    <span>/</span>
+<h3 style="text-align: center;">SBI Bank</h3>
 
     {% if current_user %}
-
-
-
-    <a href="{% url 'logout' %}">Logout</a>
+<hr>
 
     {% for x in customers %}
     <h2 id="col_wel">Welcome <span style="color: dodgerblue;">{{x.customer_name}}</span>!</h2>
@@ -42,7 +93,25 @@
 
     {% endblock %}
 
-    <br><br><br><br><br>
+    <br><br><br>
+<hr>
+    <br><br>
+
+<div id="flip">About Us</div>
+<div id="panel">State Bank of India (SBI) a Fortune 500 company, is an Indian Multinational,
+    Public Sector Banking and Financial services statutory body headquartered in Mumbai.
+    The rich heritage and legacy of over 200 years, accredits SBI as the most trusted Bank by Indians
+    through generations. SBI, the largest Indian Bank with 1/4th market share, serves over
+    48 crore customers through its vast network of over 22,405 branches, 65,627 ATMs/ADWMs, 76,089 BC
+    outlets, with an undeterred focus on innovation, and customer centricity, which stems from the
+    core values of the Bank - Service, Transparency, Ethics, Politeness and Sustainability.
+    The Bank has successfully diversified businesses through its various subsidiaries i.e SBI
+    General Insurance, SBI Life Insurance, SBI Mutual Fund, SBI Card, etc. It has spread its
+    presence globally and operates across time zones through 235 offices in 29 foreign countries.
+    Growing with times, SBI continues to redefine banking in India, as it aims to offer responsible
+    and sustainable Banking solutions..</div>
+
+    <br>
     <footer>
     <p>© Copyright State Bank of India 2023</p>
     </footer>
