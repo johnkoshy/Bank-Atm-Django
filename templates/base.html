@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'bankapp/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'bankapp/myglobal.css' %}">
     <script src="{% static 'bankapp/myscript.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body id="bg" style="background-image: url('{% static 'bankapp/light_background.jpg' %}');">
     <header>
@@ -17,6 +18,7 @@
     </header>
     <marquee><h2>Welcome to SBI Bank</h2></marquee>
     <div id="time"></div>
+    <div id="frontpage-message" style="display: none;">Welcome to the Front Page!</div>
     {% block content %}
     {% endblock %}
     <script>
@@ -24,6 +26,11 @@
             document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
         }
         setInterval(updateTime, 1000);
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#frontpage-message").fadeIn(1000);
+        });
     </script>
 </body>
 </html>

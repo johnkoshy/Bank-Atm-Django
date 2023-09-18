@@ -10,6 +10,12 @@ from django.contrib.auth.hashers import make_password, check_password
 from .forms import FellowCreationForm
 from .models import Fellow, Type
 
+from django.shortcuts import render, redirect
+from .models import Customer
+from .forms import DepositForm, WithdrawForm
+
+def frontpage(request):
+    return render(request, 'frontpage.html', {})
 
 # Create your views here.
 def home(request):
@@ -93,13 +99,22 @@ def customer_details(request):
         return HttpResponse(template.render(context, request))
 
 
-def deposit(request, id):
-    customers = Customer.objects.get(id=id)
-    template = loader.get_template('deposit.html')
-    context = {
-       'customers': customers,
-        }
-    return HttpResponse(template.render(context, request))
+def deposit(request):
+    if request.method == 'POST':
+        form = DepositForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            if amount <= 0:
+                form.add_error('amount', 'Amount must be positive.')
+                return render(request, 'deposit.html', {'form': form})
+            customer = Customer.objects.get(user=request.user)
+            customer.balance += amount
+            customer.deposit = amount
+            customer.save()
+            return redirect('customer_details')
+    else:
+        form = DepositForm()
+    return render(request, 'deposit.html', {'form': form})
 
 
 def deposit_amount(request, id):
@@ -114,13 +129,25 @@ def deposit_amount(request, id):
     return HttpResponseRedirect(reverse('customer_details'))
 
 
-def withdraw(request, id):
-    customers = Customer.objects.get(id=id)
-    template = loader.get_template('withdraw.html')
-    context = {
-       'customers': customers,
-        }
-    return HttpResponse(template.render(context, request))
+def withdraw(request):
+    if request.method == 'POST':
+        form = WithdrawForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            customer = Customer.objects.get(user=request.user)
+            if amount <= 0:
+                form.add_error('amount', 'Amount must be positive.')
+                return render(request, 'withdraw.html', {'form': form})
+            if amount > customer.balance:
+                form.add_error('amount', 'Insufficient balance.')
+                return render(request, 'withdraw.html', {'form': form})
+            customer.balance -= amount
+            customer.withdrawal = amount
+            customer.save()
+            return redirect('customer_details')
+    else:
+        form = WithdrawForm()
+    return render(request, 'withdraw.html', {'form': form})
 
 
 def withdraw_amount(request, id):
