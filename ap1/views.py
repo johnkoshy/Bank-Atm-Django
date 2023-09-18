@@ -109,3 +109,15 @@ def withdraw_amount(request, id):
     customers.balance = bal
     customers.save()
     return HttpResponseRedirect(reverse('customer_details'))
+
+
+
+
+
+
+
+
+
+
+
+# By John Koshy
