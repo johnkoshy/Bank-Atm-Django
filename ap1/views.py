@@ -121,7 +121,7 @@ def card_selection(request):
         form = FellowCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add')
+            return redirect('success')
     return render(request, 'home.html', {'form': form})
 
 
@@ -142,7 +142,8 @@ def load_types(request):
     return render(request, 'type_dropdown_list_options.html', {'types': types})
 
 
-
+def success(request):
+    return render(request, 'confirmation.html')
 
 
 

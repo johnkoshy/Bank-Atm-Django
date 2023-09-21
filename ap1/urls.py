@@ -15,4 +15,5 @@ urlpatterns = [
     path('card/add/', views.card_selection, name='add'),
     path('card/<int:pk>/', views.update_view, name='change'),
     path('card/ajax/load-types/', views.load_types, name='ajax_load_types'), # AJAX
+    path('card/success', views.success, name='success'),
 ]
