@@ -19,6 +19,11 @@
     <marquee><h2>Welcome to SBI Bank</h2></marquee>
     <div id="time"></div>
     <div id="frontpage-message" style="display: none;">Welcome to the Front Page!</div>
+    <form method="post" action="{% url 'phone_activation' %}">
+        {% csrf_token %}
+        <input type="tel" name="phone_number" placeholder="Enter phone number">
+        <button type="submit">Activate Phone</button>
+    </form>
     {% block content %}
     {% endblock %}
     <script>

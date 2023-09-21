@@ -14,7 +14,7 @@
             <form method="post" id="FellowForm" data-types-url="{% url 'ajax_load_types' %}" class="form-horizontal" role="form">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Submit" class="btn btn-info">
+                <input type="submit" value="Submit" name="submit1" class="btn btn-info">
             </form>
         </div>
     </div>
