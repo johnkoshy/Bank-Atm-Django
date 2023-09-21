@@ -21,6 +21,7 @@ DEBUG = True
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bankapp',
     'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [

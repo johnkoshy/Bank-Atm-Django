@@ -15,10 +15,13 @@ Copy
 2. Open the project in VS Code (optional):
 code .
 
+<<<<<<< HEAD
 text
 
 Copy
 
+=======
+>>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
 3. Set up Python:
 Ensure Python 3.13.0 is installed. Download from https://www.python.org/downloads/release/python-3130/.
 Check "Add Python 3.13 to PATH" during installation.
@@ -42,10 +45,15 @@ Copy
 python -m venv venv
 venv\Scripts\activate  # On Windows
 
+<<<<<<< HEAD
 text
 
 Copy
 On macOS/Linux, use `source venv/bin/activate`.
+=======
+On macOS/Linux, use: 
+source venv/bin/activate.
+>>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
 
 5. Install dependencies:
 Install Django, MySQL client, and phonenumber-field:
@@ -107,22 +115,52 @@ python manage.py migrate
 Collect static files:
 text
 
+<<<<<<< HEAD
 Copy
+=======
+Troubleshooting:
+
+If you encounter an error like Table 'djangodb.customer' doesn't exist:
+Verify the djangodb database exists in phpMyAdmin.
+Check MySQL is running on port 3306 (netstat -an | find "3306").
+If the database is missing, create it in phpMyAdmin and rerun migrate.
+If migrate says "No migrations to apply" but tables are missing, reset the database:
+    Drop the djangodb database in phpMyAdmin.
+    Recreate it: Click "New", enter djangodb, and click "Create".
+    Rerun python manage.py migrate.
+If you manually deleted a table (e.g., bankapp_customer or customer), reset the bankapp migrations:
+
+python manage.py migrate bankapp zero --fake
+
+Drop any remaining bankapp tables in phpMyAdmin, then reapply:
+
+python manage.py migrate bankapp
+
+If you see multiple migrations with the same number (e.g., two 0006 migrations), squash them:
+
+python manage.py squashmigrations bankapp 0008
+
+Then reset the database as above.
+
+9. Collect static files:
+>>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
 python manage.py collectstatic
 Add test data (optional, for testing login):
 text
 
 Copy
 python manage.py shell
+
 In the shell:
 
 python
 
 Copy
+
 from bankapp.models import Customer
 Customer.objects.create(
     username="testuser",
-    password="test123",
+    password=make_password("test123"),
     customer_name="Test User",
     balance=1000.00
 )
@@ -137,9 +175,12 @@ text
 Copy
 python manage.py runserver
 Access the app at http://127.0.0.1:8000. Test login with testuser/test123.
+
 Features
-User signup and login
+
+User signup and login with password hashing
 Balance check
+
 Deposit and withdrawal
 Card and type management
 Phone activation
@@ -150,7 +191,9 @@ Tables: customer, bankapp_user, bankapp_card, bankapp_type, bankapp_fellow.
 Check customer in phpMyAdmin for customer details.
 
 Requirements
+
 Python 3.13
+
 Django 4.2.3
 mysqlclient
 django-phonenumber-field

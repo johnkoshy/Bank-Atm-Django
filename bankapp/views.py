@@ -18,9 +18,11 @@ def signup(request):
             return render(request, 'signup.html', {'uname': username})
         try:
             customer = Customer(
+
                 username=username,
                 password=make_password(password),  # Hash the password
                 balance=0.00
+
             )
             customer.save()
             print(f"Customer created with ID: {customer.id}, Username: {customer.username}")  # Debug
@@ -108,8 +110,10 @@ def card_selection(request):
         if form.is_valid():
             form.save()
             return redirect('success')
+
     else:
         form = CardSelectionForm()
+
     return render(request, 'home.html', {'form': form})
 
 def update_view(request, pk):
@@ -129,6 +133,7 @@ def load_types(request):
     return render(request, 'type_dropdown_list_options.html', {'types': types})
 
 def success(request):
+
     return render(request, 'success.html', {})
 
 def phone_activation(request):
@@ -137,3 +142,4 @@ def phone_activation(request):
         # Add phone activation logic here (e.g., save to database or send SMS)
         return redirect('success')
     return render(request, 'base.html')
+

@@ -25,10 +25,12 @@
         const url = $("#FellowForm").attr("data-types-url");  // get the url of the `load_types` view
         const cardId = $(this).val();  // get the selected card ID from the HTML input
 
+
         $.ajax({                       // initialize an AJAX request
             url: url,                    // set the url of the request (= /fellow/ajax/load-types/ )
             data: {
                 'card_id': cardId       // GET parameters
+
             },
             success: function (data) {
                 $("#id_type").html(data);
