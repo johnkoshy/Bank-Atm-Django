@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Card Selection{% endblock %}
+
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container"> <p><h1>Select a card and type</h1></p>
+    <div class="card">
+        <div class="card-header">
+            Card Selection
+        </div>
+        <div class="card-body">
+            <form method="post" id="FellowForm" data-types-url="{% url 'ajax_load_types' %}" class="form-horizontal" role="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+        </div>
+      </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_card").change(function () {
+        const url = $("#FellowForm").attr("data-types-url");  // get the url of the `load_types` view
+        const cardId = $(this).val();  // get the selected card ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /fellow/ajax/load-types/ )
+            data: {
+                'card_id': cardId       // GET parameters
+            },
+            success: function (data) {
+                $("#id_type").html(data);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
+
+{% endblock %}

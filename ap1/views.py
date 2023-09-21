@@ -1,9 +1,13 @@
-from django.shortcuts import render, redirect
+import data as data
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.urls import reverse
 from ap1.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import User
+
+from .forms import FellowCreationForm
+from .models import Fellow, Type
 
 
 # Create your views here.
@@ -109,6 +113,43 @@ def withdraw_amount(request, id):
     customers.balance = bal
     customers.save()
     return HttpResponseRedirect(reverse('customer_details'))
+
+
+def card_selection(request):
+    form = FellowCreationForm()
+    if request.method == 'POST':
+        form = FellowCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add')
+    return render(request, 'home.html', {'form': form})
+
+
+def update_view(request, pk):
+    fellow = get_object_or_404(Fellow, pk=pk)
+    form = FellowCreationForm(instance=fellow)
+    if request.method == 'POST':
+        form = FellowCreationForm(request.POST, instance=fellow)
+        if form.is_valid():
+            form.save()
+            return redirect('change', pk=pk)
+    return render(request, 'home.html', {'form': form})
+
+
+def load_types(request):
+    card_id = request.GET.get('card_id')
+    types = Type.objects.filter(card_id=card_id).all()
+    return render(request, 'type_dropdown_list_options.html', {'types': types})
+
+
+
+
+
+
+
+
+
+
 
 
 
