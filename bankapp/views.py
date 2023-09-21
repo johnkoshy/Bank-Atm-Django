@@ -11,8 +11,8 @@ from .forms import FellowCreationForm
 from .models import Fellow, Type
 
 from django.shortcuts import render, redirect
-from .models import Customer
-from .forms import DepositForm, WithdrawForm
+from .models import Customer, Card
+from .forms import DepositForm, WithdrawForm, CardSelectionForm
 
 def frontpage(request):
     return render(request, 'frontpage.html', {})
@@ -163,34 +163,121 @@ def withdraw_amount(request, id):
 
 
 def card_selection(request):
-    form = FellowCreationForm()
     if request.method == 'POST':
-        form = FellowCreationForm(request.POST)
+        form = CardSelectionForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('success')
+    else:
+        form = CardSelectionForm()
     return render(request, 'home.html', {'form': form})
 
 
 def update_view(request, pk):
-    fellow = get_object_or_404(Fellow, pk=pk)
-    form = FellowCreationForm(instance=fellow)
+    card = get_object_or_404(Card, pk=pk)
     if request.method == 'POST':
-        form = FellowCreationForm(request.POST, instance=fellow)
+        form = CardSelectionForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            return redirect('change', pk=pk)
+            return redirect('success')
+    else:
+        form = CardSelectionForm(instance=card)
     return render(request, 'home.html', {'form': form})
 
 
 def load_types(request):
     card_id = request.GET.get('card_id')
-    types = Type.objects.filter(card_id=card_id).all()
+    types = Type.objects.filter(card_id=card_id).order_by('name')
     return render(request, 'type_dropdown_list_options.html', {'types': types})
 
 
 def success(request):
-    return render(request, 'confirmation.html')
+    return render(request, 'success.html', {})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

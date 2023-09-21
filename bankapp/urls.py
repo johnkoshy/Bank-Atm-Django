@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
- 
 urlpatterns = [
     path('', views.frontpage, name='frontpage'),
     path('login/', views.login, name='login'),
@@ -14,6 +13,6 @@ urlpatterns = [
     path('withdraw/withdraw_amount/<int:id>', views.withdraw_amount, name='withdraw_amount'),
     path('card/add/', views.card_selection, name='add'),
     path('card/<int:pk>/', views.update_view, name='change'),
-    path('card/ajax/load-types/', views.load_types, name='ajax_load_types'), # AJAX
+    path('card/ajax/load-types/', views.load_types, name='ajax_load_types'),  # AJAX
     path('card/success', views.success, name='success'),
 ]
