@@ -1,0 +1,13 @@
+# Django
+staticfiles/
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+
+# IDE files
+.idea/
+
+# macOS
+.DS_Store

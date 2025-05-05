@@ -1,4 +1,4 @@
-import data as data
+# import data as data
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
