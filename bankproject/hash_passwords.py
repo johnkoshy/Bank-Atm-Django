@@ -1,4 +1,3 @@
-# hash_passwords.py
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bankproject.settings')
 
