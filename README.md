@@ -52,6 +52,9 @@ Balance check
 Deposit and withdrawal
 Card and type management
 
+## Screenshots
+![Dashboard](screenshots/login-screenshot.png)
+
 Database:
 Uses MySQL (djangodb).
 Tables: ap1_customer, ap1_card, ap1_type, ap1_fellow.

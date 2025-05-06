@@ -11,9 +11,11 @@
         </style>
 <form method="POST">
     {% csrf_token %}
-    <input type="text" name="uname" placeholder="User Name">
+    <label for="username">Username:</label>
+    <input type="text" name="uname" placeholder="User Name" required>
     <br><br>
-    <input type="text" name="pwd" placeholder="Password">
+    <label for="password">Password:</label>
+    <input type="password" name="pwd" placeholder="Password">
     <br><br>
     <input id="login" type="submit" name="submit" value="Login">
 </form>
