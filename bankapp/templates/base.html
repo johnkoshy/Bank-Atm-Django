@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -9,28 +8,28 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  $("#flip").click(function(){
-    $("#panel").slideToggle("slow");
-  });
-});
-</script>
+    <script>
+    $(document).ready(function(){
+      $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+      });
+    });
+    </script>
 
-<!--    below is the jquery for About US portion-->
-<style>
-#panel, #flip {
-  padding: 5px;
-  text-align: center;
-  background-color: #e5eecc;
-  border: solid 1px #c3c3c3;
-}
+    <!--    below is the jquery for About US portion-->
+    <style>
+    #panel, #flip {
+      padding: 5px;
+      text-align: center;
+      background-color: #e5eecc;
+      border: solid 1px #c3c3c3;
+    }
 
-#panel {
-  padding: 50px;
-  display: none;
-}
-</style>
+    #panel {
+      padding: 50px;
+      display: none;
+    }
+    </style>
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'bankapp/myglobal.css' %}">
@@ -51,33 +50,33 @@ $(document).ready(function(){
 
             <ul class="navbar-nav">
                 <li class="left-margin seperator"><a style="color: aliceblue;" href="/"><i
-                            class="fa-solid fa-house">&nbsp;&nbsp;</i>Home</a>&nbsp;&nbsp;&nbsp;</li>
-                &nbsp;&nbsp;&nbsp;
+                            class="fa-solid fa-house">  </i>Home</a>   </li>
+                   
 
                 <li class="seperator"><a style="color: aliceblue;" href="/card/add"><i
-                            class="fa-solid fa-credit-card">&nbsp;&nbsp;</i>Cards</a>&nbsp;&nbsp;&nbsp;</li>
-                &nbsp;&nbsp;&nbsp;
+                            class="fa-solid fa-credit-card">  </i>Cards</a>   </li>
+                   
 
-                <li class="seperator">&nbsp;<a style="color:aliceblue" href="tel:1800-425-3800">Call Us Now
-                        1800-425-3800</a>&nbsp;&nbsp;&nbsp;</li>
+                <li class="seperator"> <a style="color:aliceblue" href="tel:1800-425-3800">Call Us Now
+                        1800-425-3800</a>   </li>
 
                 <li>
                     <a href="https://www.pinterest.com/TheOfficialSBI/"><i style="margin-left: 800px; color:aliceblue"
-                            class="fa-brands fa-pinterest"></i></a>&nbsp;&nbsp;
+                            class="fa-brands fa-pinterest"></i></a>  
                     <a href="https://www.facebook.com/StateBankOfIndia"><i style="color:aliceblue"
-                            class="fa-brands fa-facebook-f"></i></a>&nbsp;&nbsp;
+                            class="fa-brands fa-facebook-f"></i></a>  
                     <a href="https://twitter.com/TheOfficialSBI"><i style="color:aliceblue"
-                            class="fa-brands fa-twitter"></i></a>&nbsp;&nbsp;
+                            class="fa-brands fa-twitter"></i></a>  
                     <a href="https://www.instagram.com/theofficialsbi/"><i style="color:aliceblue"
-                            class="fa-brands fa-instagram"></i></a>&nbsp;&nbsp;
+                            class="fa-brands fa-instagram"></i></a>  
 
                 </li>
             </ul>
         </nav>
     </div>
 
-<marquee direction="right">Welcome to SBI &#128512</marquee><br>
-<body id="bg" style="background-image: url('{% static "bankapp/light_background.jpg"%}')";>
+<marquee direction="right">Welcome to SBI 😀</marquee><br>
+<body id="bg" style="background-image: url('{% static \"bankapp/light_background.jpg\"%}')";>
 
 <h3 style="text-align: center;">SBI Bank</h3>
 
@@ -125,11 +124,5 @@ $(document).ready(function(){
 </body>
 
 </html>
-
-
-
-
-
-
 
 <!--# By John Koshy-->
