@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.urls import reverse
-from ap1.models import Customer
+from bankapp.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
 
 from .forms import FellowCreationForm

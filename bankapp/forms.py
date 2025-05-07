@@ -1,5 +1,5 @@
 from django import forms
-from ap1.models import Customer, Fellow, Type
+from bankapp.models import Customer, Fellow, Type
 
 
 class CustomerForm(forms.ModelForm):

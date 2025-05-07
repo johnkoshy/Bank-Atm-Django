@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Customer
 
-from ap1.models import Type, Card, Fellow
+from bankapp.models import Type, Card, Fellow
 
 
 # Register your models here.

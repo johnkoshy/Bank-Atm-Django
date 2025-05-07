@@ -37,7 +37,7 @@ class Card(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'ap1_card'
+        db_table = 'bankapp_card'
         verbose_name_plural = "Card"
 
 
@@ -49,7 +49,7 @@ class Type(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'ap1_type'
+        db_table = 'bankapp_type'
         verbose_name_plural = "Type"
 
 
@@ -63,5 +63,5 @@ class Fellow(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'ap1_fellow'
+        db_table = 'bankapp_fellow'
         verbose_name_plural = "Fellow"

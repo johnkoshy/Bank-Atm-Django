@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name_plural': 'Card',
-                'db_table': 'ap1_card',
+                'db_table': 'bankapp_card',
             },
         ),
         migrations.CreateModel(
@@ -56,11 +56,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=40)),
-                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ap1.card')),
+                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bankapp.card')),
             ],
             options={
                 'verbose_name_plural': 'Type',
-                'db_table': 'ap1_type',
+                'db_table': 'bankapp_type',
             },
         ),
         migrations.CreateModel(
@@ -69,12 +69,12 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=124)),
                 ('email', models.CharField(max_length=125)),
-                ('card', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='ap1.card')),
-                ('type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='ap1.type')),
+                ('card', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='bankapp.card')),
+                ('type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='bankapp.type')),
             ],
             options={
                 'verbose_name_plural': 'Fellow',
-                'db_table': 'ap1_fellow',
+                'db_table': 'bankapp_fellow',
             },
         ),
     ]
