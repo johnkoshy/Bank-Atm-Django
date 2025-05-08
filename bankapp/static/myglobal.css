@@ -13,7 +13,11 @@
     background-position: top;
     background-attachment: fixed;
 }
+body {
+  background-color: #f0f0f0;
+}
 .logo {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin: 10px auto;
 }
