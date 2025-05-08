@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 from .models import Customer, Card, Type, Fellow
 from .forms import DepositForm, WithdrawForm, CardSelectionForm
 
@@ -12,18 +14,28 @@ def signup(request):
         username = request.POST.get('uname')
         password = request.POST.get('pwd')
         if Customer.objects.filter(username=username).exists():
-            return render(request, 'signup.html', {'error': 'Username already exists.'})
-        customer = Customer(username=username, password=password, balance=0.00)
-        customer.save()
-        return redirect('login')
+            messages.error(request, "Username already taken. Please choose a different username.")
+            return render(request, 'signup.html', {'uname': username})
+        try:
+            customer = Customer(
+                username=username,
+                password=make_password(password),  # Hash the password
+                balance=0.00
+            )
+            customer.save()
+            messages.success(request, "Signup successful! Please log in.")
+            return redirect('login')
+        except Exception as e:
+            messages.error(request, f"An error occurred during signup: {str(e)}")
+            return render(request, 'signup.html', {'uname': username})
     return render(request, 'signup.html')
 
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('uname')
         password = request.POST.get('pwd')
-        customer = Customer.objects.filter(username=username, password=password).first()
-        if customer:
+        try:
+            customer = Customer.objects.get(username=username)
             user = authenticate(request, username=username, password=password)
             if user is None:
                 from django.contrib.auth.models import User
@@ -31,8 +43,14 @@ def login(request):
                 user.set_password(password)
                 user.save()
             auth_login(request, user)
+            messages.success(request, "Login successful!")
             return redirect('customer_details')
-        return render(request, 'login.html', {'error': 'Invalid username or password.'})
+        except Customer.DoesNotExist:
+            messages.error(request, "Username does not exist.")
+            return render(request, 'login.html', {'uname': username})
+        except Exception as e:
+            messages.error(request, f"An error occurred during login: {str(e)}")
+            return render(request, 'login.html', {'uname': username})
     return render(request, 'login.html')
 
 def logout(request):

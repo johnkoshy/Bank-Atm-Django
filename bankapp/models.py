@@ -1,7 +1,7 @@
 from django.db import models
 
 class Customer(models.Model):
-    username = models.CharField(max_length=100, unique=True)
+    username = models.CharField(max_length=100, unique=True)  # Add unique=True
     password = models.CharField(max_length=100)
     customer_name = models.CharField(max_length=20, default="Unknown")
     deposit = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
