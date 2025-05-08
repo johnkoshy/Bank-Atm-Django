@@ -5,7 +5,8 @@ from django.template import loader
 from django.urls import reverse
 from bankapp.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password, check_password
 from .forms import FellowCreationForm
 from .models import Fellow, Type
 
@@ -29,14 +30,27 @@ def signup(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        if Customer.objects.filter(username=uname).count() > 0:
-            return HttpResponse('Username already exists.')
-        else:
-            user = User(username=uname, password=pwd)
-            user.save()
+        
+        # Check if username already exists
+        if Customer.objects.filter(username=uname).exists():
+            messages.error(request, "Username already taken. Please choose a different username.")
+            return render(request, 'signup.html', {'uname': uname})
+        
+        # Create a new Customer (not User)
+        try:
+            customer = Customer(
+                username=uname,
+                password=make_password(pwd),  # Hash the password
+                balance=0.00,   # Set default balance
+            )
+            customer.save()
+            messages.success(request, "Signup successful! Please log in.")
             return redirect('login')
-    else:
-        return render(request, 'signup.html')
+        except Exception as e:
+            messages.error(request, f"An error occurred during signup: {str(e)}")
+            return render(request, 'signup.html', {'uname': uname})
+
+    return render(request, 'signup.html')
 
 
 def login(request):
@@ -44,12 +58,18 @@ def login(request):
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
 
-        check_user = Customer.objects.filter(username=uname, password=pwd)
-        if check_user:
-            request.session['user'] = uname
-            return redirect('home')
-        else:
-            return HttpResponse('Please enter valid Username or Password.')
+        try:
+            customer = Customer.objects.get(username=uname)
+            if check_password(pwd, customer.password):  # Check hashed password
+                request.session['user'] = uname
+                messages.success(request, "Login successful!")
+                return redirect('home')
+            else:
+                messages.error(request, "Invalid password.")
+                return render(request, 'login.html', {'uname': uname})
+        except Customer.DoesNotExist:
+            messages.error(request, "Username does not exist.")
+            return render(request, 'login.html', {'uname': uname})
 
     return render(request, 'login.html')
 

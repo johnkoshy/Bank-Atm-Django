@@ -2,23 +2,27 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-{% load static %}
 <h2>Login</h2>
-<style>
-        #login:hover {
-            color: blue;
-        }
-        </style>
-<form method="POST">
+
+<!-- Display messages -->
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
     <label for="username">Username:</label>
-    <input type="text" name="uname" placeholder="User Name" required>
+    <input type="text" name="uname" value="{{ uname }}" placeholder="User Name" required>
     <br><br>
     <label for="password">Password:</label>
-    <input type="password" name="pwd" placeholder="Password">
+    <input type="password" name="pwd" placeholder="Password" required>
     <br><br>
-    <input id="login" type="submit" name="submit" value="Login">
+    <input type="submit" name="submit" value="Login">
 </form>
 
-
+<p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
 {% endblock %}

@@ -4,14 +4,25 @@
 {% block body %}
 <h2>Sign Up</h2>
 
-<form method="POST">
+<!-- Display messages -->
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="POST" action="{% url 'signup' %}">
     {% csrf_token %}
-    <input type="text" name="uname" placeholder="Username">
+    <label for="username">Username:</label>
+    <input type="text" name="uname" value="{{ uname }}" placeholder="Username" required>
     <br><br>
-    <input type="text" name="pwd" placeholder="Password">
+    <label for="password">Password:</label>
+    <input type="password" name="pwd" placeholder="Password" required>
     <br><br>
     <input type="submit" name="submit" value="Sign Up">
-
 </form>
+<p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
 
 {% endblock %}
