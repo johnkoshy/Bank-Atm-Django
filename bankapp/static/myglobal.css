@@ -1,5 +1,6 @@
 #col_wel {
-  color: violet;
+  color: dodgerblue;
+  font-size: 24px;
 }
 
 .center {
@@ -7,15 +8,17 @@
   margin: 0 auto;
 }
 
-#bg{
+#bg {
     background-size: 1800px 900px;
     background-repeat: no-repeat;
     background-position: top;
     background-attachment: fixed;
 }
+
 body {
   background-color: #f0f0f0;
 }
+
 .logo {
   display: block;
   text-align: center;
