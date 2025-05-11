@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
@@ -15,7 +14,6 @@
     });
     </script>
 
-    <!-- below is the jquery for About Us portion -->
     <style>
     #panel, #flip {
       padding: 5px;
@@ -32,46 +30,45 @@
 
     <link rel="stylesheet" href="{% static 'bankapp/myglobal.css' %}">
     <script src="https://kit.fontawesome.com/75b09f8ac8.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
-<div style="text-align: center;">
-    <img src="{% static 'bankapp/SBI-logo_cust1.jpg' %}" alt="SBI Logo" class="logo">
-</div>
+<body id="bg" style="background-image: url('{% static 'bankapp/light_background.jpg' %}')">
+    <div style="text-align: center;">
+        <img src="{% static 'bankapp/SBI-logo_cust1.jpg' %}" alt="SBI Logo" class="logo">
+    </div>
 
-<div style="background-color: rgb(28, 28, 100);">
-    <!-- inbuilt class used to set the menus horizontally -->
-    <nav class="navbar navbar-expand-sm">
-        <ul class="navbar-nav">
-            <li class="left-margin seperator"><a style="color: aliceblue;" href="/"><i class="fa-solid fa-house">  </i>Home</a>    </li>
-            <li class="seperator"><a style="color: aliceblue;" href="/card/add"><i class="fa-solid fa-credit-card">  </i>Cards</a>    </li>
-            <li class="seperator"> <a style="color:aliceblue" href="tel:1800-425-3800">Call Us Now 1800-425-3800</a>    </li>
-            <li>
-                <a href="https://www.pinterest.com/TheOfficialSBI/"><i style="margin-left: 800px; color:aliceblue" class="fa-brands fa-pinterest"></i></a>  
-                <a href="https://www.facebook.com/StateBankOfIndia"><i style="color:aliceblue" class="fa-brands fa-facebook-f"></i></a>  
-                <a href="https://twitter.com/TheOfficialSBI/"><i style="color:aliceblue" class="fa-brands fa-twitter"></i></a>  
-                <a href="https://www.instagram.com/theofficialsbi/"><i style="color:aliceblue" class="fa-brands fa-instagram"></i></a>  
-            </li>
-        </ul>
-    </nav>
-</div>
+    <div style="background-color: rgb(28, 28, 100);">
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="left-margin separator mx-3"><a style="color: aliceblue;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="separator mx-3"><a style="color: aliceblue;" href="/card/add"><i class="fa-solid fa-credit-card"></i> Cards</a></li>
+                <li class="separator mx-3"><a style="color:aliceblue" href="tel:1800-425-3800">Call Us Now 1800-425-3800</a></li>
+            </ul>
+            <div class="ml-auto">
+                <a href="https://www.pinterest.com/TheOfficialSBI/"><i style="color:aliceblue" class="fa-brands fa-pinterest mx-1"></i></a>
+                <a href="https://www.facebook.com/StateBankOfIndia"><i style="color:aliceblue" class="fa-brands fa-facebook-f mx-1"></i></a>
+                <a href="https://twitter.com/TheOfficialSBI/"><i style="color:aliceblue" class="fa-brands fa-twitter mx-1"></i></a>
+                <a href="https://www.instagram.com/theofficialsbi/"><i style="color:aliceblue" class="fa-brands fa-instagram mx-1"></i></a>
+            </div>
+        </nav>
+    </div>
 
-<marquee direction="right">Welcome to SBI 😀</marquee><br>
-<body id="bg" style="background-image: url('{% static \"bankapp/light_background.jpg\" %}')">
+    <marquee direction="right">Welcome to SBI 😀</marquee><br>
+
     <h3 style="text-align: center;">SBI Bank</h3>
 
     {% if current_user %}
-    <hr>
-    {% for x in customers %}
-    <h2 id="col_wel">Welcome <span style="color: dodgerblue;">{{x.customer_name}}</span>!</h2>
-    {% endfor %}
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    <span>/</span>
-    <a href="{% url 'signup' %}">Sign Up</a>
-    <hr>
-    {% endif %}
+<hr>
+{% for x in customers %}
+<h2 id="col_wel">Welcome <span style="color: dodgerblue;">{{x.username}}</span>!</h2>
+{% endfor %}
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<span>/</span>
+<a href="{% url 'signup' %}">Sign Up</a>
+<hr>
+{% endif %}
 
     {% block body %}{% endblock %}
 
@@ -98,9 +95,7 @@
         <p>© Copyright State Bank of India 2023</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'bankapp/myscript.js' %}"></script>
 </body>
-
 </html>
-
-<!--# By John Koshy-->

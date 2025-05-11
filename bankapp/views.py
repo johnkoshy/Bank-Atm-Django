@@ -23,9 +23,11 @@ def signup(request):
                 balance=0.00
             )
             customer.save()
+            print(f"Customer created with ID: {customer.id}, Username: {customer.username}")  # Debug
             messages.success(request, "Signup successful! Please log in.")
             return redirect('login')
         except Exception as e:
+            print(f"Error during signup: {str(e)}")  # Debug
             messages.error(request, f"An error occurred during signup: {str(e)}")
             return render(request, 'signup.html', {'uname': username})
     return render(request, 'signup.html')

@@ -3,7 +3,7 @@ from django.db import models
 class Customer(models.Model):
     username = models.CharField(max_length=100, unique=True)  # Add unique=True
     password = models.CharField(max_length=100)
-    customer_name = models.CharField(max_length=20, default="Unknown")
+    customer_name = models.CharField(max_length=100, blank=True)
     deposit = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     withdrawal = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2)
