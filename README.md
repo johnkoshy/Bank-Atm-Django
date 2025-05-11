@@ -144,11 +144,9 @@ Deposit and withdrawal
 Card and type management
 Phone activation
 Screenshots
-
-
 Database
 Uses MySQL (djangodb).
-Tables: customer, bankapp_card, bankapp_type, bankapp_fellow.
+Tables: customer, bankapp_user, bankapp_card, bankapp_type, bankapp_fellow.
 Check customer in phpMyAdmin for customer details.
 
 Requirements

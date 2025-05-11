@@ -13,7 +13,7 @@ class Customer(models.Model):
         return self.customer_name
 
     class Meta:
-        db_table = 'customer'
+        db_table = 'bankapp_customer'
         verbose_name_plural = "Customer"
 
 class User(models.Model):
