@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bank ATM{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'bankapp/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'bankapp/myglobal.css' %}">
+    <script src="{% static 'bankapp/myscript.js' %}"></script>
+</head>
+<body id="bg" style="background-image: url('{% static 'bankapp/light_background.jpg' %}');">
+    <header>
+        <img src="{% static 'bankapp/SBI-logo_cust1.jpg' %}" alt="SBI Logo" class="logo">
+        <nav>
+            <a href="{% url 'cards' %}">Cards</a>
+        </nav>
+    </header>
+    <marquee><h2>Welcome to SBI Bank</h2></marquee>
+    <div id="time"></div>
+    {% block content %}
+    {% endblock %}
+    <script>
+        function updateTime() {
+            document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

@@ -25,9 +25,7 @@ SECRET_KEY = 'django-insecure-exf%3_pr5w2brpbj+1wqix13zp54d9wv^b802bmdsi#jip-+&w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-STATICFILES_DIRS = [
-    BASE_DIR / "bankapp/static",  # Updated from ap1/static to bankapp/static
-]
+STATICFILES_DIRS = []
 
 ALLOWED_HOSTS = []
 
