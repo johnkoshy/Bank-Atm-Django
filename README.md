@@ -86,8 +86,9 @@ Access at http://127.0.0.1:8000 with testuser/test123.
 
 
 Screenshots
-
+![Screenshot](screenshots/login-screenshot.png)
 Caption: Login interface of the Django Bank ATM.
+
 Troubleshooting
 
 "Table 'djangodb.customer' doesn't exist":
