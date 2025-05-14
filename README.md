@@ -1,98 +1,45 @@
-# Django Bank ATM
+Django Bank ATM
+A Django-based ATM application with user authentication, balance checks, deposits, withdrawals, and card management.
+Features
 
-A Django-based ATM application with login, signup, balance check, deposit, and withdrawal features.
+Secure signup and login with password hashing
+Real-time balance inquiries
+Deposit and withdrawal transactions
+Card and type management
+Phone number activation
 
-## Setup
+Setup
 
-1. Clone the repository:
+Clone the Repository:
 git clone https://github.com/johnkoshy/Bank-Atm-Django.git
 cd Bank-Atm-Django
 
-text
 
-Copy
+Install Python 3.13:
 
-2. Open the project in VS Code (optional):
-code .
+Download from Python 3.13.0.
+Check "Add Python to PATH" during installation.
+Verify: python --version (should output Python 3.13.0).
 
-<<<<<<< HEAD
-text
 
-Copy
-
-=======
->>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
-3. Set up Python:
-Ensure Python 3.13.0 is installed. Download from https://www.python.org/downloads/release/python-3130/.
-Check "Add Python 3.13 to PATH" during installation.
-
-Verify installation:
-python --version
-
-text
-
-Copy
-Expected output: Python 3.13.0
-
-Verify pip:
-pip --version
-
-text
-
-Copy
-
-4. Set up a virtual environment (recommended):
+Set Up Virtual Environment:
 python -m venv venv
-venv\Scripts\activate  # On Windows
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # macOS/Linux
 
-<<<<<<< HEAD
-text
 
-Copy
-On macOS/Linux, use `source venv/bin/activate`.
-=======
-On macOS/Linux, use: 
-source venv/bin/activate.
->>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
-
-5. Install dependencies:
-Install Django, MySQL client, and phonenumber-field:
+Install Dependencies:
 pip install django mysqlclient django-phonenumber-field
 
-text
 
-Copy
-If a `requirements.txt` exists:
-pip install -r requirements.txt
+Set Up MySQL:
 
-text
+Install XAMPP or MySQL.
+Start MySQL, access phpMyAdmin, and create a database named djangodb.
+Verify port: netstat -an | find "3306" (should show DNS).
 
-Copy
 
-6. Set up MySQL database:
-Install XAMPP (includes MySQL/MariaDB) from https://www.apachefriends.org/.
-Start Apache and MySQL in the XAMPP Control Panel.
-Alternatively, install MySQL Community Server from https://dev.mysql.com/downloads/mysql/.
-Open http://localhost/phpmyadmin/.
-Log in (default: root, password blank or set in XAMPP).
-Create a database named `djangodb`.
-
-Verify MySQL is running on port 3306:
-netstat -an | find "3306"
-
-text
-
-Copy
-Expected output:
-TCP    0.0.0.0:3306           0.0.0.0:0              LISTENING
-
-text
-
-Copy
-
-7. Update Django settings:
-Open `bankproject/settings.py` and configure the database:
-```python
+Configure Database:Edit bankproject/settings.py:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -106,95 +53,58 @@ DATABASES = {
         }
     }
 }
-Run migrations:
-text
 
-Copy
+
+Run Migrations:
 python manage.py makemigrations
 python manage.py migrate
-Collect static files:
-text
-
-<<<<<<< HEAD
-Copy
-=======
-Troubleshooting:
-
-If you encounter an error like Table 'djangodb.customer' doesn't exist:
-Verify the djangodb database exists in phpMyAdmin.
-Check MySQL is running on port 3306 (netstat -an | find "3306").
-If the database is missing, create it in phpMyAdmin and rerun migrate.
-If migrate says "No migrations to apply" but tables are missing, reset the database:
-    Drop the djangodb database in phpMyAdmin.
-    Recreate it: Click "New", enter djangodb, and click "Create".
-    Rerun python manage.py migrate.
-If you manually deleted a table (e.g., bankapp_customer or customer), reset the bankapp migrations:
-
-python manage.py migrate bankapp zero --fake
-
-Drop any remaining bankapp tables in phpMyAdmin, then reapply:
-
-python manage.py migrate bankapp
-
-If you see multiple migrations with the same number (e.g., two 0006 migrations), squash them:
-
-python manage.py squashmigrations bankapp 0008
-
-Then reset the database as above.
-
-9. Collect static files:
->>>>>>> 987ac15 (Updated app: fix models, static files, add migrations, and improved README.)
 python manage.py collectstatic
-Add test data (optional, for testing login):
-text
 
-Copy
+
+Add Test Data (Optional):
 python manage.py shell
 
-In the shell:
-
-python
-
-Copy
-
+Run:
 from bankapp.models import Customer
+from django.contrib.auth.hashers import make_password
 Customer.objects.create(
     username="testuser",
     password=make_password("test123"),
     customer_name="Test User",
     balance=1000.00
 )
-Hash passwords:
-text
 
-Copy
+
+Hash Passwords:
 python bankproject/hash_passwords.py
-Start the server:
-text
 
-Copy
+
+Start Server:
 python manage.py runserver
-Access the app at http://127.0.0.1:8000. Test login with testuser/test123.
 
-Features
+Access at http://127.0.0.1:8000 with testuser/test123.
 
-User signup and login with password hashing
-Balance check
 
-Deposit and withdrawal
-Card and type management
-Phone activation
 Screenshots
-Database
-Uses MySQL (djangodb).
-Tables: customer, bankapp_user, bankapp_card, bankapp_type, bankapp_fellow.
-Check customer in phpMyAdmin for customer details.
+
+Caption: Login interface of the Django Bank ATM.
+Troubleshooting
+
+"Table 'djangodb.customer' doesn't exist":
+Ensure djangodb exists in phpMyAdmin.
+Recreate: Drop djangodb, recreate it, and run python manage.py migrate.
+
+
+Migration Issues:python manage.py migrate bankapp zero --fake
+python manage.py migrate bankapp
+
+
 
 Requirements
 
 Python 3.13
-
 Django 4.2.3
 mysqlclient
 django-phonenumber-field
-XAMPP (MySQL/MariaDB)
+XAMPP or MySQL
+
