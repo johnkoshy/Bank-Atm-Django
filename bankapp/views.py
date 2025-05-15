@@ -84,6 +84,20 @@ def deposit(request, id):
         form = DepositForm()
     return render(request, 'deposit.html', {'form': form, 'customer': customer})
 
+
+def deposit_amount(request, id):
+    customer = Customer.objects.get(id=id)
+    if request.method == 'POST':
+        form = DepositForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            customer.balance += amount
+            customer.save()
+            return redirect('some_success_url')  # Update with your success URL
+    else:
+        form = DepositForm()
+    return render(request, 'bankapp/deposit.html', {'form': form, 'customer': customer})
+
 def withdraw(request, id):
     customer = get_object_or_404(Customer, id=id, username=request.user.username)
     if request.method == 'POST':
@@ -100,6 +114,25 @@ def withdraw(request, id):
             customer.withdrawal = amount
             customer.save()
             return redirect('customer_details')
+    else:
+        form = WithdrawForm()
+    return render(request, 'withdraw.html', {'form': form, 'customer': customer})
+
+def withdraw_amount(request, id):
+    customer = get_object_or_404(Customer, id=id, username=request.user.username)
+    if request.method == 'POST':
+        form = WithdrawForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            if amount <= 0:
+                form.add_error('amount', 'Amount must be positive.')
+                return render(request, 'withdraw.html', {'form': form, 'customer': customer})
+            if amount > customer.balance:
+                form.add_error('amount', 'Insufficient balance.')
+                return render(request, 'withdraw.html', {'form': form, 'customer': customer})
+            customer.balance -= amount
+            customer.save()
+            return redirect('customer_details')  # Update with your success URL
     else:
         form = WithdrawForm()
     return render(request, 'withdraw.html', {'form': form, 'customer': customer})

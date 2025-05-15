@@ -1,41 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Bank ATM{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
     <link rel="icon" type="image/x-icon" href="{% static 'bankapp/favicon.ico' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+      });
+    });
+    </script>
+
+    <style>
+    #panel, #flip {
+      padding: 5px;
+      text-align: center;
+      background-color: #e5eecc;
+      border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+      padding: 50px;
+      display: none;
+    }
+    </style>
+
     <link rel="stylesheet" href="{% static 'bankapp/myglobal.css' %}">
-    <script src="{% static 'bankapp/myscript.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/75b09f8ac8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
-<body id="bg" style="background-image: url('{% static 'bankapp/light_background.jpg' %}');">
-    <header>
+
+<body id="bg" style="background-image: url('{% static 'bankapp/light_background.jpg' %}')">
+    <div style="text-align: center;">
         <img src="{% static 'bankapp/SBI-logo_cust1.jpg' %}" alt="SBI Logo" class="logo">
-        <nav>
-            <a href="{% url 'cards' %}">Cards</a>
+    </div>
+
+    <div style="background-color: rgb(28, 28, 100);">
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="left-margin separator mx-3"><a style="color: aliceblue;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="separator mx-3"><a style="color: aliceblue;" href="/card/add"><i class="fa-solid fa-credit-card"></i> Cards</a></li>
+                <li class="separator mx-3"><a style="color:aliceblue" href="tel:1800-425-3800">Call Us Now 1800-425-3800</a></li>
+            </ul>
+            <div class="ml-auto">
+                <a href="https://www.pinterest.com/TheOfficialSBI/"><i style="color:aliceblue" class="fa-brands fa-pinterest mx-1"></i></a>
+                <a href="https://www.facebook.com/StateBankOfIndia"><i style="color:aliceblue" class="fa-brands fa-facebook-f mx-1"></i></a>
+                <a href="https://twitter.com/TheOfficialSBI/"><i style="color:aliceblue" class="fa-brands fa-twitter mx-1"></i></a>
+                <a href="https://www.instagram.com/theofficialsbi/"><i style="color:aliceblue" class="fa-brands fa-instagram mx-1"></i></a>
+            </div>
         </nav>
-    </header>
-    <marquee><h2>Welcome to SBI Bank</h2></marquee>
-    <div id="time"></div>
-    <div id="frontpage-message" style="display: none;">Welcome to the Front Page!</div>
-    <form method="post" action="{% url 'phone_activation' %}">
-        {% csrf_token %}
-        <input type="tel" name="phone_number" placeholder="Enter phone number">
-        <button type="submit">Activate Phone</button>
-    </form>
-    {% block content %}
-    {% endblock %}
-    <script>
-        function updateTime() {
-            document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
-        }
-        setInterval(updateTime, 1000);
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#frontpage-message").fadeIn(1000);
-        });
-    </script>
+    </div>
+
+    <marquee direction="right">Welcome to SBI 😀</marquee><br>
+
+    <h3 style="text-align: center;">SBI Bank</h3>
+
+    {% if current_user %}
+<hr>
+{% for x in customers %}
+<h2 id="col_wel">Welcome <span style="color: dodgerblue;">{{x.username}}</span>!</h2>
+{% endfor %}
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<span>/</span>
+<a href="{% url 'signup' %}">Sign Up</a>
+<hr>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+    <br><br><br>
+    <hr>
+    <br><br>
+
+    <div id="flip">About Us</div>
+    <div id="panel">State Bank of India (SBI) a Fortune 500 company, is an Indian Multinational,
+        Public Sector Banking and Financial services statutory body headquartered in Mumbai.
+        The rich heritage and legacy of over 200 years, accredits SBI as the most trusted Bank by Indians
+        through generations. SBI, the largest Indian Bank with 1/4th market share, serves over
+        48 crore customers through its vast network of over 22,405 branches, 65,627 ATMs/ADWMs, 76,089 BC
+        outlets, with an undeterred focus on innovation, and customer centricity, which stems from the
+        core values of the Bank - Service, Transparency, Ethics, Politeness and Sustainability.
+        The Bank has successfully diversified businesses through its various subsidiaries i.e SBI
+        General Insurance, SBI Life Insurance, SBI Mutual Fund, SBI Card, etc. It has spread its
+        presence globally and operates across time zones through 235 offices in 29 foreign countries.
+        Growing with times, SBI continues to redefine banking in India, as it aims to offer responsible
+        and sustainable Banking solutions.</div>
+
+    <br>
+    <footer>
+        <p>© Copyright State Bank of India 2023</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'bankapp/myscript.js' %}"></script>
 </body>
 </html>
+
+<!--# By John Koshy-->
