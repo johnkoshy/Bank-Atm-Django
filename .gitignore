@@ -1,13 +1,9 @@
-# Django
-staticfiles/
-*.pyc
 __pycache__/
-
-# Virtual environment
+*.pyc
 venv/
-
-# IDE files
-.idea/
-
-# macOS
-.DS_Store
+*.sqlite3
+*.log
+.vscode/
+.env
+staticfiles/
+bankproject/settings.py
